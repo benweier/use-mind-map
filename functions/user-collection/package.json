@@ -1,0 +1,17 @@
+{
+  "name": "user-collection",
+  "version": "0.0.0",
+  "description": "",
+  "private": true,
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "16.0"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "node-appwrite": "^5.0.0"
+  }
+}
