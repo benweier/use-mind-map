@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "module": "es2020",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowUnreachableCode": false,
+    "outDir": "build",
+    "target": "es2020",
+    "declaration": false,
+    "checkJs": true,
+    "sourceMap": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "isolatedModules": true,
+    "importHelpers": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "incremental": true,
+    "types": ["node", "webpack-env"]
+  },
+  "files": ["usemindmap.d.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "functions/**/*.js"],
+  "exclude": ["node_modules", "build", ".eslintrc.js"]
+}
