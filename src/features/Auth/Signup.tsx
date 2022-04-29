@@ -104,13 +104,13 @@ export const Signup = () => {
                     <FormLabel htmlFor="name" fontSize="sm">
                       Name
                     </FormLabel>
-                    <Input id="name" type="name" {...(register('name'), { required: true })} />
+                    <Input id="name" type="name" {...register('name', { required: true })} />
                   </FormControl>
                   <FormControl isRequired>
                     <FormLabel htmlFor="email" fontSize="sm">
                       Email
                     </FormLabel>
-                    <Input id="email" type="email" {...(register('email'), { required: true })} />
+                    <Input id="email" type="email" {...register('email', { required: true })} />
                   </FormControl>
                   <FormControl isRequired>
                     <FormLabel htmlFor="password" fontSize="sm">
