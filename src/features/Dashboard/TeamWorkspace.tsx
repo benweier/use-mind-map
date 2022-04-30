@@ -31,7 +31,7 @@ const WorkspaceDocuments: FC<{ id: MindMapCollectionID }> = ({ id }) => {
                   <Stack spacing={2}>
                     <Icon mx="auto" as={FcMindMap} fontSize={64} />
                     <HStack>
-                      <Link as={RouterLink} to={`/~/maps/${document.$collection}/${document.$id}`} color="blue.500">
+                      <Link as={RouterLink} to={`/~/maps/${document.$collection}/${document.$id}`}>
                         <Text as="div" fontSize="md" fontWeight="bold">
                           {document.name}
                         </Text>

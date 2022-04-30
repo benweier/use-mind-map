@@ -52,7 +52,7 @@ export const PasswordRecovery = () => {
               <HStack spacing="1" justify="center">
                 <Text>Remembered your password?</Text>
                 <Text fontWeight="semibold">
-                  <Link as={RouterLink} color="blue.500" to="/sign-in">
+                  <Link as={RouterLink} to="/sign-in">
                     Sign in
                   </Link>
                 </Text>

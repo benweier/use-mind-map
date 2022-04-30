@@ -61,7 +61,7 @@ export const Signin = () => {
               <HStack spacing="1" justify="center">
                 <Text>Don&apos;t have an account?</Text>
                 <Text fontWeight="semibold">
-                  <Link as={RouterLink} color="blue.500" to="/sign-up">
+                  <Link as={RouterLink} to="/sign-up">
                     Sign up
                   </Link>
                 </Text>
@@ -111,7 +111,7 @@ export const Signin = () => {
                     Sign in
                   </Button>
                   <Text textAlign="center" fontSize="sm">
-                    <Link as={RouterLink} color="blue.500" to="/forgot-password" state={{ email }}>
+                    <Link as={RouterLink} to="/forgot-password" state={{ email }}>
                       Forgot password?
                     </Link>
                   </Text>

@@ -47,7 +47,7 @@ export const Teams: FC = () => {
                     <Stack spacing={2}>
                       <Icon mx="auto" as={HiOutlineUserGroup} fontSize={64} color="gray.600" />
                       <HStack>
-                        <Link as={RouterLink} to={`/~/teams/${team.$id}`} color="blue.500">
+                        <Link as={RouterLink} to={`/~/teams/${team.$id}`}>
                           <Text as="div" fontSize="md" fontWeight="bold" maxW="100%" isTruncated>
                             {team.name}
                           </Text>
