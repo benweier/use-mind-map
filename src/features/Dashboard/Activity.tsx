@@ -6,6 +6,7 @@ import { Link as RouterLink } from 'react-router-dom'
 import { Meta } from '@/components/Meta'
 import { getAccount, listMindMaps, listTeams } from '@/services/api'
 import { MindMapCollectionID } from '@/services/appwrite'
+import { CreateMindMind } from './CreateMindMap'
 
 const WorkspaceDocuments: FC<{ id: MindMapCollectionID }> = ({ id }) => {
   const { isSuccess, data } = useQuery(['collection', id], () => listMindMaps(id))
@@ -13,15 +14,9 @@ const WorkspaceDocuments: FC<{ id: MindMapCollectionID }> = ({ id }) => {
   return (
     <Box>
       {isSuccess && data.documents.length === 0 && (
-        <>
-          <Text>
-            No mind maps have been created. Why not{' '}
-            <Link color="blue.500" as={RouterLink} to="/~/maps/create" state={{ collection: id }}>
-              start one
-            </Link>
-            ?
-          </Text>
-        </>
+        <Text textAlign="center" py={8}>
+          No mind maps have been created. Why not start one?
+        </Text>
       )}
 
       {isSuccess && data.documents.length > 0 && (
@@ -64,18 +59,23 @@ export const Activity: FC = () => {
         </Flex>
 
         <Box p={6}>
-          <Stack spacing={12}>
+          <Stack spacing={16}>
             <Heading as="h2" size="md">
               Workspaces
             </Heading>
+
             {accountQuery.isSuccess && (
-              <Stack spacing={2}>
-                <Heading as="div" size="sm" color="gray.600">
-                  {accountQuery.data.name}{' '}
-                  <Text as="span" fontSize="xs" color="gray.500">
-                    (PRIVATE)
-                  </Text>
-                </Heading>
+              <Stack spacing={4}>
+                <HStack justify="space-between" spacing={4}>
+                  <Heading as="div" size="sm" color="gray.600">
+                    {accountQuery.data.name}{' '}
+                    <Text as="span" fontSize="xs" color="gray.500">
+                      (PRIVATE)
+                    </Text>
+                  </Heading>
+
+                  <CreateMindMind workspace={`user-${accountQuery.data.$id}`} />
+                </HStack>
 
                 <WorkspaceDocuments id={`user-${accountQuery.data.$id}`} />
               </Stack>
@@ -85,12 +85,17 @@ export const Activity: FC = () => {
                 {teamsQuery.data.teams.map((team) => (
                   <Fragment key={team.$id}>
                     <Stack spacing={2}>
-                      <Heading as="div" size="sm" color="gray.600">
-                        {team.name}{' '}
-                        <Text as="span" fontSize="xs" color="gray.500">
-                          (TEAM)
-                        </Text>
-                      </Heading>
+                      <HStack justify="space-between" spacing={4}>
+                        <Heading as="div" size="sm" color="gray.600">
+                          {team.name}{' '}
+                          <Text as="span" fontSize="xs" color="gray.500">
+                            (TEAM)
+                          </Text>
+                        </Heading>
+
+                        <CreateMindMind workspace={`team-${team.$id}`} />
+                      </HStack>
+
                       <WorkspaceDocuments id={`team-${team.$id}`} />
                     </Stack>
                   </Fragment>
