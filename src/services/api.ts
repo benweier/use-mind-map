@@ -29,6 +29,8 @@ export const getMindMap = (workspace: string, id: string) =>
 export const updateMindMap = (workspace: string, id: string, data: MindMapDocument) =>
   appwrite.database.updateDocument<MindMapDocument>(workspace, id, data)
 
+export const deleteMindMap = (workspace: string, id: string) => appwrite.database.deleteDocument(workspace, id)
+
 export const inviteTeamMember = (team: string, email: string, name: string) =>
   appwrite.teams.createMembership(team, email, [], `${window.location.origin}/invite`, name)
 
