@@ -22,20 +22,20 @@ import { MindMapCollectionID } from '@/services/appwrite'
 
 interface CreateMindMapFormState {
   name: string
-  collection: MindMapCollectionID
+  workspace: MindMapCollectionID
 }
 
-export const CreateMindMind = ({ name = '', collection }: { name?: string; collection: MindMapCollectionID }) => {
+export const CreateMindMind = ({ name = '', workspace }: { name?: string; workspace: MindMapCollectionID }) => {
   const navigate = useNavigate()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { register, handleSubmit } = useForm<CreateMindMapFormState>({
     defaultValues: {
-      collection,
+      workspace,
       name,
     },
   })
   const { mutateAsync, isLoading } = useMutation(
-    (values: CreateMindMapFormState) => createMindMap(values.collection, values.name),
+    (values: CreateMindMapFormState) => createMindMap(values.workspace, values.name),
     {
       onSuccess: (response) => {
         navigate(`/~/maps/${response.$collection}/${response.$id}`)

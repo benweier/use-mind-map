@@ -20,7 +20,7 @@ const WorkspaceDocuments: FC<{ id: MindMapCollectionID }> = ({ id }) => {
         </Heading>
 
         <HStack>
-          <CreateMindMind collection={id} />
+          <CreateMindMind workspace={id} />
         </HStack>
 
         {isSuccess && data.documents.length > 0 && (
