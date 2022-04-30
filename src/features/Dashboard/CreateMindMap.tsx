@@ -3,6 +3,7 @@ import {
   Button,
   FormControl,
   FormLabel,
+  Icon,
   Input,
   Modal,
   ModalBody,
@@ -15,6 +16,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { HiPlusCircle } from 'react-icons/hi'
 import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { createMindMap } from '@/services/api'
@@ -46,7 +48,7 @@ export const CreateMindMind = ({ name = '', workspace }: { name?: string; worksp
 
   return (
     <>
-      <Button colorScheme="blue" onClick={onOpen}>
+      <Button colorScheme="blue" onClick={onOpen} leftIcon={<Icon as={HiPlusCircle} />}>
         Create a Mind Map
       </Button>
 
@@ -64,7 +66,7 @@ export const CreateMindMind = ({ name = '', workspace }: { name?: string; worksp
                       <FormLabel htmlFor="name" fontSize="sm">
                         Name
                       </FormLabel>
-                      <Input type="text" {...register('name')} autoFocus />
+                      <Input type="text" {...register('name', { required: true })} autoFocus />
                     </FormControl>
                   </Stack>
                 </Stack>
