@@ -22,8 +22,6 @@ export const Profile: FC = () => {
           title: `Profile updated!`,
           description: `From now on you'll be seen as "${response.name}"`,
           status: 'success',
-          duration: 7000,
-          isClosable: true,
           position: 'bottom',
         })
       },
