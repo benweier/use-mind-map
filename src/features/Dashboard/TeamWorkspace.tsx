@@ -8,6 +8,7 @@ import { listMindMaps } from '@/services/api'
 import { MindMapCollectionID } from '@/services/appwrite'
 import { Models } from 'appwrite'
 import { CreateMindMind } from './CreateMindMap'
+import { MindMapActions } from './MindMapActions'
 
 const WorkspaceDocuments: FC<{ id: MindMapCollectionID }> = ({ id }) => {
   const { isSuccess, data } = useQuery(['documents', id], () => listMindMaps(id))
@@ -30,12 +31,14 @@ const WorkspaceDocuments: FC<{ id: MindMapCollectionID }> = ({ id }) => {
                 <GridItem border="1px" borderColor="gray.100" bg="gray.50" boxShadow="sm" borderRadius="lg" p={5}>
                   <Stack spacing={2}>
                     <Icon mx="auto" as={FcMindMap} fontSize={64} />
-                    <HStack>
+                    <HStack spacing={4} justify="space-between">
                       <Link as={RouterLink} to={`/~/maps/${document.$collection}/${document.$id}`}>
-                        <Text as="div" fontSize="md" fontWeight="bold">
+                        <Text as="div" fontSize="md" fontWeight="bold" overflowWrap="anywhere">
                           {document.name}
                         </Text>
                       </Link>
+
+                      <MindMapActions workspace={id} id={document.$id} />
                     </HStack>
                   </Stack>
                 </GridItem>
