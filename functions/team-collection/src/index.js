@@ -1,6 +1,8 @@
+/// <reference types="../../functions" />
+
 const sdk = require('node-appwrite')
 
-/** @type {import('functions/functions').FunctionsHandler<sdk.Models.Collection>} */
+/** @type {FunctionsHandler<sdk.Models.Collection>} */
 const handler = async (req, res) => {
   if (
     ![
