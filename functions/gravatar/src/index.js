@@ -1,9 +1,7 @@
-/// <reference types="../../functions" />
-
 const crypto = require('crypto')
 const sdk = require('node-appwrite')
 
-/** @type {GetGravatar} */
+/** @type {import('functions/functions').GetGravatar} */
 const getGravatarURL = (value) => {
   const hash = crypto.createHash('md5').update(value).digest('hex')
   const gravatar = new URL(`https://www.gravatar.com/avatar/${hash}`)
@@ -13,7 +11,7 @@ const getGravatarURL = (value) => {
   return gravatar.toString()
 }
 
-/** @type {FunctionsHandler<undefined>} */
+/** @type {import('functions/functions').FunctionsHandler<undefined>} */
 const handler = async (req, res) => {
   if (
     ![
