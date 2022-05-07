@@ -1,5 +1,3 @@
-import { Models } from "appwrite"
-
 declare interface FunctionsRequest {
   headers: Record<string, string>
   payload: string
@@ -16,5 +14,5 @@ declare interface FunctionsHandler<P> {
 }
 
 declare interface GetGravatar {
-  (payload: Models.User | Models.Session): string
+  (value: string): string
 }
