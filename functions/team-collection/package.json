@@ -1,7 +1,6 @@
 {
   "name": "team-collection",
   "version": "0.0.0",
-  "description": "",
   "private": true,
   "main": "src/index.js",
   "scripts": {
@@ -12,6 +11,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "node-appwrite": "^5.0.0"
+    "node-appwrite": "^5.1.0"
   }
 }
