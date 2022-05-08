@@ -35,7 +35,7 @@ export const CreateTeam = () => {
   })
   const { mutateAsync, isLoading } = useMutation((values: CreateTeamFormState) => createTeam(values.name), {
     onSuccess: (response) => {
-      navigate(`/~/maps/${response.$id}`)
+      navigate(`/~/teams/${response.$id}`)
     },
   })
   const onSubmit = useCallback<SubmitHandler<CreateTeamFormState>>((values) => mutateAsync(values), [mutateAsync])
