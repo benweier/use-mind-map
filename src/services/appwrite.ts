@@ -1,3 +1,4 @@
+import { env } from '@/config/env.client'
 import { Appwrite, Models } from 'appwrite'
 
 type MindMapCollectionType = 'user' | 'team'
@@ -14,4 +15,4 @@ export interface MindMapDocument extends Models.Document {
 
 export const appwrite = new Appwrite()
 
-appwrite.setEndpoint('https://api.usemindmap.app/v1').setProject('62627b181ca61dc83009')
+appwrite.setEndpoint(env.APPWRITE_ENDPOINT).setProject(env.APPWRITE_PROJECT_ID)
