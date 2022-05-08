@@ -125,12 +125,26 @@ export const DashboardLayout = () => (
     >
       <Stack w="full" justify="space-between" spacing={1}>
         <Stack spacing={{ base: 5, sm: 8 }}>
-          <Link as={RouterLink} to="/">
+          <Link as={RouterLink} to="/~" _hover={{ underline: 'none' }}>
             <HStack spacing={4}>
               <Icon as={FcMindMap} fontSize={36} />
-              <Text as="div" fontSize="lg" fontWeight="bold">
-                useMindMap
-              </Text>
+              <Box>
+                <Text
+                  as="span"
+                  fontSize="sm"
+                  fontWeight="black"
+                  bgColor="blue.500"
+                  color="white"
+                  px={1}
+                  rounded="base"
+                  verticalAlign="text-bottom"
+                >
+                  USE
+                </Text>
+                <Text as="span" fontSize="xl" fontWeight="bold">
+                  Mindmap
+                </Text>
+              </Box>
             </HStack>
           </Link>
           <ActiveUserProfile />
