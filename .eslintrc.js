@@ -1,9 +1,8 @@
 module.exports = {
   plugins: ['@typescript-eslint', 'prettier', 'import'],
   extends: [
-    'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    // 'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:import/typescript',
@@ -11,6 +10,7 @@ module.exports = {
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
+    project: ['./tsconfig.json'],
     ecmaFeatures: {
       jsx: true,
     },
@@ -61,13 +61,14 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['functions/**/*'],
+      files: ['.eslintrc.js', 'webpack.config.js', 'functions/**/*.js'],
       plugins: ['node'],
       extends: ['plugin:node/recommended'],
       env: {
         node: true,
       },
       rules: {
+        'node/no-unpublished-require': 'off',
         '@typescript-eslint/no-unsafe-assignment': 'off',
         '@typescript-eslint/no-var-requires': 'off',
       },
