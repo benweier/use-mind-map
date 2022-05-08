@@ -1,3 +1,5 @@
+import { Node } from 'react-flow-renderer'
+import { env } from '@/config/env.client'
 import { RealtimeResponseEvent } from 'appwrite'
 import { MindMapCollectionID, MindMapDocument, appwrite } from './appwrite'
 
@@ -35,3 +37,31 @@ export const inviteTeamMember = (team: string, email: string, name: string) =>
   appwrite.teams.createMembership(team, email, [], `${window.location.origin}/invite`, name)
 
 export const getTeamMembers = (id: string) => appwrite.teams.getMemberships(id)
+
+export const updateMindmapNode = (collection: string, document: string, node: Node<{ label: string }>) =>
+  appwrite.functions.createExecution(
+    env.APPWRITE_FUNCTION_MINDMAP,
+    JSON.stringify({
+      collection,
+      document,
+      type: 'node.update.position',
+      node: {
+        id: node.id,
+        data: node.data,
+        position: node.position,
+        width: node.width,
+        height: node.height,
+      },
+    }),
+  )
+
+export const deleteMindmapNodes = (collection: string, document: string, nodes: Node<{ label: string }>[]) =>
+  appwrite.functions.createExecution(
+    env.APPWRITE_FUNCTION_MINDMAP,
+    JSON.stringify({
+      collection,
+      document,
+      type: 'node.delete',
+      nodes: nodes.map((node) => node.id),
+    }),
+  )
