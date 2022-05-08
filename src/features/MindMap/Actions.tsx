@@ -1,8 +1,9 @@
 import { memo, useCallback } from 'react'
-import { Box, Button, Flex } from '@chakra-ui/react'
+import { Box, Button, Flex, HStack } from '@chakra-ui/react'
 import { nanoid } from 'nanoid/non-secure'
 import { Node, useReactFlow } from 'react-flow-renderer'
 import { useMutation } from 'react-query'
+import { useNavigate } from 'react-router-dom'
 import { createMindmapNode } from '@/services/api'
 
 const createNode = (): Node<{ label: string }> => ({
@@ -16,6 +17,7 @@ const createNode = (): Node<{ label: string }> => ({
 })
 
 export const MindMapActions = memo(({ workspace, id }: { workspace: string; id: string }) => {
+  const navigate = useNavigate()
   const { setNodes } = useReactFlow()
   const { mutate } = useMutation((node: Node<{ label: string }>) => createMindmapNode(workspace, id, node))
 
@@ -38,10 +40,17 @@ export const MindMapActions = memo(({ workspace, id }: { workspace: string; id: 
       roundedBottom="xl"
       boxShadow="lg"
     >
-      <Flex alignItems="center" gap={4}>
-        <Button variant="primary" onClick={onAdd}>
-          Add Node
-        </Button>
+      <Flex alignItems="center" justify="space-between" gap={4}>
+        <HStack>
+          <Button variant="primary" onClick={onAdd}>
+            Add Node
+          </Button>
+        </HStack>
+        <HStack>
+          <Button variant="ghost" onClick={() => navigate('/~')}>
+            Return to Dashboard
+          </Button>
+        </HStack>
       </Flex>
     </Box>
   )
