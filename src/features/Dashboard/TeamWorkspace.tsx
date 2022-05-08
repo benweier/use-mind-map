@@ -1,5 +1,18 @@
 import { FC, Fragment } from 'react'
-import { Box, Container, Flex, Grid, GridItem, HStack, Heading, Icon, Link, Stack, Text } from '@chakra-ui/react'
+import {
+  Box,
+  Container,
+  Flex,
+  Grid,
+  GridItem,
+  HStack,
+  Heading,
+  Icon,
+  Link,
+  Spacer,
+  Stack,
+  Text,
+} from '@chakra-ui/react'
 import { FcMindMap } from 'react-icons/fc'
 import { useQuery, useQueryClient } from 'react-query'
 import { Link as RouterLink, useParams } from 'react-router-dom'
@@ -8,6 +21,7 @@ import { listMindMaps } from '@/services/api'
 import { MindMapCollectionID } from '@/services/appwrite'
 import { Models } from 'appwrite'
 import { CreateMindMind } from './CreateMindMap'
+import { InviteMember } from './InviteMember'
 import { MindMapActions } from './MindMapActions'
 
 const WorkspaceDocuments: FC<{ id: MindMapCollectionID }> = ({ id }) => {
@@ -66,11 +80,11 @@ export const TeamWorkspace: FC = () => {
 
       <Container maxW="5xl">
         <Flex p={6} alignItems="center">
-          <Stack spacing={2}>
-            <Heading as="h1" size="lg">
-              {team.name}
-            </Heading>
-          </Stack>
+          <Heading as="h1" size="lg">
+            {team.name}
+          </Heading>
+          <Spacer />
+          <InviteMember id={team.$id} />
         </Flex>
 
         <Box p={6}>
