@@ -1,10 +1,11 @@
 const path = require('path')
-const webpack = require('webpack')
+const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-// const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
-const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const webpack = require('webpack')
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 
 const HTMLPluginConfig = new HtmlWebpackPlugin({
   template: path.resolve(__dirname, 'public', 'index.html'),
@@ -28,10 +29,10 @@ const DefinePluginConfig = new webpack.DefinePlugin({
   'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 })
 
-module.exports = (env,argv) => {
+module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production'
 
-  const plugins = [HTMLPluginConfig, DefinePluginConfig, new WebpackManifestPlugin()]
+  const plugins = [HTMLPluginConfig, DefinePluginConfig, new WebpackManifestPlugin(), new Dotenv()]
 
   if (!isProduction) {
     plugins.push(new ReactRefreshPlugin())
@@ -50,7 +51,7 @@ module.exports = (env,argv) => {
         util: false,
       },
       alias: {
-        "react-redux": "react-redux/es/next",
+        'react-redux': 'react-redux/es/next',
       },
     },
     output: {
