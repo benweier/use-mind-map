@@ -18,7 +18,7 @@
     "outDir": "build",
     "target": "es2020",
     "declaration": false,
-    "checkJs": true,
+    "checkJs": false,
     "sourceMap": false,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -36,6 +36,6 @@
     "types": ["node", "webpack-env"]
   },
   "files": ["usemindmap.d.ts"],
-  "include": ["src/**/*.ts", "src/**/*.tsx", "functions/**/*.js"],
-  "exclude": ["node_modules", "build", ".eslintrc.js"]
+  "include": [".eslintrc.js", "webpack.config.js", "src/**/*.ts", "src/**/*.tsx", "functions/**/*.js"],
+  "exclude": ["node_modules", "build"]
 }
