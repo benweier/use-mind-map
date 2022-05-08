@@ -10,6 +10,7 @@ import { theme } from '@/theme'
 const DashboardRoute = lazy(() => import('@/routes/Dashboard').then((mod) => ({ default: mod.DashboardRoute })))
 const SigninRoute = lazy(() => import('@/features/Auth').then((mod) => ({ default: mod.Signin })))
 const SignupRoute = lazy(() => import('@/features/Auth').then((mod) => ({ default: mod.Signup })))
+const AcceptInviteRoute = lazy(() => import('@/features/Auth').then((mod) => ({ default: mod.AcceptInvite })))
 const PasswordRecoveryRoute = lazy(() => import('@/features/Auth').then((mod) => ({ default: mod.PasswordRecovery })))
 const PasswordRecoveryConfirmationRoute = lazy(() =>
   import('@/features/Auth').then((mod) => ({ default: mod.PasswordRecoveryConfirmation })),
@@ -32,6 +33,7 @@ export const App = () => {
                   <Route path="/forgot-password" element={<PasswordRecoveryRoute />} />
                   <Route path="/reset-password" element={<PasswordRecoveryConfirmationRoute />} />
                   <Route path="/sign-out" element={<></>} />
+                  <Route path="/invite" element={<AcceptInviteRoute />} />
 
                   <Route path="/~/maps/*" element={<MindMapRoute />} />
                   <Route path="/~/*" element={<DashboardRoute />} />
