@@ -32,7 +32,15 @@ const DefinePluginConfig = new webpack.DefinePlugin({
 module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production'
 
-  const plugins = [HTMLPluginConfig, DefinePluginConfig, new WebpackManifestPlugin(), new Dotenv()]
+  const plugins = [
+    HTMLPluginConfig,
+    DefinePluginConfig,
+    new WebpackManifestPlugin(),
+    new Dotenv({
+      silent: process.env.NODE_ENV === 'production',
+      systemvars: process.env.NODE_ENV === 'production',
+    }),
+  ]
 
   if (!isProduction) {
     plugins.push(new ReactRefreshPlugin())
