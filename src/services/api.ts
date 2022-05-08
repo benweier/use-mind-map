@@ -1,4 +1,4 @@
-import { Node } from 'react-flow-renderer'
+import { Edge, Node } from 'react-flow-renderer'
 import { env } from '@/config/env.client'
 import { RealtimeResponseEvent } from 'appwrite'
 import { MindMapCollectionID, MindMapDocument, appwrite } from './appwrite'
@@ -40,7 +40,7 @@ export const getTeamMembers = (id: string) => appwrite.teams.getMemberships(id)
 
 export const createMindmapNode = (collection: string, document: string, node: Node<{ label: string }>) =>
   appwrite.functions.createExecution(
-    env.APPWRITE_FUNCTION_MINDMAP,
+    env.APPWRITE_FUNCTION_MINDMAP_NODES,
     JSON.stringify({
       collection,
       document,
@@ -58,7 +58,7 @@ export const createMindmapNode = (collection: string, document: string, node: No
 
 export const updateMindmapNode = (collection: string, document: string, node: Node<{ label: string }>) =>
   appwrite.functions.createExecution(
-    env.APPWRITE_FUNCTION_MINDMAP,
+    env.APPWRITE_FUNCTION_MINDMAP_NODES,
     JSON.stringify({
       collection,
       document,
@@ -71,15 +71,61 @@ export const updateMindmapNode = (collection: string, document: string, node: No
         height: node.height,
       },
     }),
+    true,
   )
 
 export const deleteMindmapNodes = (collection: string, document: string, nodes: Node<{ label: string }>[]) =>
   appwrite.functions.createExecution(
-    env.APPWRITE_FUNCTION_MINDMAP,
+    env.APPWRITE_FUNCTION_MINDMAP_NODES,
     JSON.stringify({
       collection,
       document,
       type: 'node.delete',
       nodes: nodes.map((node) => node.id),
     }),
+    true,
+  )
+
+export const createMindmapEdge = (collection: string, document: string, edge: Edge) =>
+  appwrite.functions.createExecution(
+    env.APPWRITE_FUNCTION_MINDMAP_EDGES,
+    JSON.stringify({
+      collection,
+      document,
+      type: 'edge.create',
+      edge: {
+        id: edge.id,
+        source: edge.source,
+        target: edge.target,
+      },
+    }),
+    true,
+  )
+
+export const updateMindmapEdge = (collection: string, document: string, edge: Edge) =>
+  appwrite.functions.createExecution(
+    env.APPWRITE_FUNCTION_MINDMAP_EDGES,
+    JSON.stringify({
+      collection,
+      document,
+      type: 'edge.update.connection',
+      edge: {
+        id: edge.id,
+        source: edge.source,
+        target: edge.target,
+      },
+    }),
+    true,
+  )
+
+export const deleteMindmapEdges = (collection: string, document: string, edges: Edge[]) =>
+  appwrite.functions.createExecution(
+    env.APPWRITE_FUNCTION_MINDMAP_EDGES,
+    JSON.stringify({
+      collection,
+      document,
+      type: 'edge.delete',
+      nodes: edges.map((edge) => edge.id),
+    }),
+    true,
   )
