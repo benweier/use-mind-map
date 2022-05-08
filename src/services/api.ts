@@ -38,6 +38,24 @@ export const inviteTeamMember = (team: string, email: string, name: string) =>
 
 export const getTeamMembers = (id: string) => appwrite.teams.getMemberships(id)
 
+export const createMindmapNode = (collection: string, document: string, node: Node<{ label: string }>) =>
+  appwrite.functions.createExecution(
+    env.APPWRITE_FUNCTION_MINDMAP,
+    JSON.stringify({
+      collection,
+      document,
+      type: 'node.create',
+      node: {
+        id: node.id,
+        data: { label: node.data.label },
+        position: node.position,
+        width: node.width,
+        height: node.height,
+      },
+    }),
+    true,
+  )
+
 export const updateMindmapNode = (collection: string, document: string, node: Node<{ label: string }>) =>
   appwrite.functions.createExecution(
     env.APPWRITE_FUNCTION_MINDMAP,
