@@ -19,6 +19,7 @@ import { HiOutlineCubeTransparent } from 'react-icons/hi'
 import { useMutation } from 'react-query'
 import { Link as RouterLink } from 'react-router-dom'
 import { Meta } from '@/components/Meta'
+import { env } from '@/config/env.client'
 import { useLocation } from '@/hooks/useLocation'
 import { appwrite } from '@/services/appwrite'
 import type { Models } from 'appwrite'
@@ -35,7 +36,7 @@ export const PasswordRecovery = () => {
     },
   })
   const { mutateAsync, isLoading } = useMutation((values: PasswordRecoveryFormState) => {
-    return appwrite.account.createRecovery(values.email, `${window.location.origin}/reset-password`)
+    return appwrite.account.createRecovery(values.email, `${env.APP_URL}/reset-password`)
   })
   const onSubmit = useCallback<SubmitHandler<PasswordRecoveryFormState>>((values) => mutateAsync(values), [mutateAsync])
 
