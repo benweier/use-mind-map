@@ -13,6 +13,7 @@ import {
   Stack,
   Text,
   useBreakpointValue,
+  useToast,
 } from '@chakra-ui/react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { FcMindMap } from 'react-icons/fc'
@@ -29,15 +30,27 @@ interface PasswordRecoveryFormState {
 }
 
 export const PasswordRecovery = () => {
+  const toast = useToast()
   const location = useLocation<Partial<Models.User<Models.Preferences>>>()
   const { register, handleSubmit } = useForm<PasswordRecoveryFormState>({
     defaultValues: {
       email: location.state?.email ?? '',
     },
   })
-  const { mutateAsync, isLoading } = useMutation((values: PasswordRecoveryFormState) => {
-    return appwrite.account.createRecovery(values.email, `${env.APP_URL}/reset-password`)
-  })
+  const { mutateAsync, isLoading, isSuccess } = useMutation(
+    (values: PasswordRecoveryFormState) => {
+      return appwrite.account.createRecovery(values.email, `${env.APP_URL}/reset-password`)
+    },
+    {
+      onSuccess: () => {
+        toast({
+          title: 'Password recovery email sent',
+          description: 'Check your email for the link to reset your password',
+          status: 'success',
+        })
+      },
+    },
+  )
   const onSubmit = useCallback<SubmitHandler<PasswordRecoveryFormState>>((values) => mutateAsync(values), [mutateAsync])
 
   return (
@@ -99,7 +112,7 @@ export const PasswordRecovery = () => {
                   </FormControl>
                 </Stack>
                 <Stack spacing={4}>
-                  <Button type="submit" variant="primary" disabled={isLoading}>
+                  <Button type="submit" variant="primary" disabled={isLoading || isSuccess}>
                     Reset password
                   </Button>
                 </Stack>
