@@ -1,5 +1,5 @@
 {
-  "name": "mindmap",
+  "name": "mindmap-nodes",
   "version": "0.0.0",
   "private": true,
   "main": "src/index.js",

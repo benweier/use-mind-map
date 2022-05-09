@@ -44,11 +44,6 @@ declare interface MindMapDeleteNodeEvent extends MindMapReference {
   nodes: string[]
 }
 
-declare interface MindMapEdgeEventTypePayload extends MindMapReference {
-  type: MindMapEdgeEventType
-  edge: string
-}
-
 declare type MindMapEventPayload =
   | MindMapCreateNodeEvent
   | MindMapMoveNodeEvent

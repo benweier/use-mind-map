@@ -1,5 +1,5 @@
 /// <reference types="../../functions" />
-/// <reference types="../mindmap" />
+/// <reference types="../mindmap-nodes" />
 
 const sdk = require('node-appwrite')
 
@@ -48,7 +48,13 @@ const handler = async (req, res) => {
             const node = JSON.parse(n)
 
             if (node.id === data.node.id) {
-              return JSON.stringify({ ...node, position: data.node.position })
+              return JSON.stringify({
+                ...node,
+                position: {
+                  x: data.node.position.x,
+                  y: data.node.position.y,
+                },
+              })
             }
 
             return n
