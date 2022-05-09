@@ -13,11 +13,12 @@ import {
   Stack,
   Text,
   useBreakpointValue,
+  useToast,
 } from '@chakra-ui/react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { FcMindMap } from 'react-icons/fc'
 import { useMutation } from 'react-query'
-import { Link as RouterLink, useSearchParams } from 'react-router-dom'
+import { Link as RouterLink, useNavigate, useSearchParams } from 'react-router-dom'
 import { Meta } from '@/components/Meta'
 import { appwrite } from '@/services/appwrite'
 
@@ -26,6 +27,8 @@ interface PasswordRecoveryConfirmationFormState {
 }
 
 export const PasswordRecoveryConfirmation = () => {
+  const toast = useToast()
+  const navigate = useNavigate()
   const [params] = useSearchParams()
   const { register, handleSubmit } = useForm<PasswordRecoveryConfirmationFormState>({
     defaultValues: {
@@ -39,6 +42,16 @@ export const PasswordRecoveryConfirmation = () => {
   const { mutateAsync, isLoading } = useMutation(
     ({ values, user, secret }: { values: PasswordRecoveryConfirmationFormState; user: string; secret: string }) => {
       return appwrite.account.updateRecovery(user, secret, values.password, values.password)
+    },
+    {
+      onSuccess: () => {
+        toast({
+          title: 'Your password has been reset!',
+          description: 'Try signing in. I bet it works now',
+          status: 'success',
+        })
+        navigate('/sign-in')
+      },
     },
   )
   const onSubmit = useCallback<SubmitHandler<PasswordRecoveryConfirmationFormState>>(
