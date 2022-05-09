@@ -25,7 +25,7 @@ const handler = async (req, res) => {
 
   switch (req.env.APPWRITE_FUNCTION_EVENT) {
     case 'teams.create': {
-      /** @type sdk.Models.Team **/
+      /** @type {sdk.Models.Team} **/
       const team = JSON.parse(req.env.APPWRITE_FUNCTION_EVENT_DATA)
       const collection = await database.createCollection(
         `team-${team.$id}`,
@@ -46,7 +46,7 @@ const handler = async (req, res) => {
     }
 
     case 'teams.update': {
-      /** @type sdk.Models.Team **/
+      /** @type {sdk.Models.Team} **/
       const team = JSON.parse(req.env.APPWRITE_FUNCTION_EVENT_DATA)
       const collection = await database.updateCollection(
         `team-${team.$id}`,
@@ -60,7 +60,7 @@ const handler = async (req, res) => {
     }
 
     case 'teams.delete': {
-      /** @type sdk.Models.Team **/
+      /** @type {sdk.Models.Team} **/
       const team = JSON.parse(req.env.APPWRITE_FUNCTION_EVENT_DATA)
 
       await database.deleteCollection(`team-${team.$id}`)
