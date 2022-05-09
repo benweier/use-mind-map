@@ -15,7 +15,7 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { HiOutlineCubeTransparent } from 'react-icons/hi'
+import { FcMindMap } from 'react-icons/fc'
 import { useMutation } from 'react-query'
 import { Link as RouterLink } from 'react-router-dom'
 import { Meta } from '@/components/Meta'
@@ -47,7 +47,28 @@ export const PasswordRecovery = () => {
       <Container maxW="md" py={{ base: 12, md: 24 }}>
         <Stack spacing={8}>
           <Stack spacing="6">
-            <Icon mx="auto" as={HiOutlineCubeTransparent} fontSize={64} color="blue.500" />
+            <Link as={RouterLink} to="/" _hover={{ underline: 'none' }}>
+              <HStack spacing={4} justify="center">
+                <Icon as={FcMindMap} fontSize={64} />
+                <Box>
+                  <Text
+                    as="span"
+                    fontSize="sm"
+                    fontWeight="black"
+                    bgColor="blue.500"
+                    color="white"
+                    px={1}
+                    rounded="base"
+                    verticalAlign="text-bottom"
+                  >
+                    USE
+                  </Text>
+                  <Text as="span" fontSize="xl" fontWeight="bold">
+                    Mindmap
+                  </Text>
+                </Box>
+              </HStack>
+            </Link>
             <Stack spacing={{ base: '2', md: '3' }} textAlign="center">
               <Heading size="lg">Forgot Password</Heading>
               <HStack spacing="1" justify="center">

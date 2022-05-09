@@ -55,7 +55,28 @@ export const Signin = () => {
       <Container maxW="md" py={{ base: 12, md: 24 }}>
         <Stack spacing={8}>
           <Stack spacing="6">
-            <Icon mx="auto" as={FcMindMap} fontSize={64} color="blue.500" />
+            <Link as={RouterLink} to="/" _hover={{ underline: 'none' }}>
+              <HStack spacing={4} justify="center">
+                <Icon as={FcMindMap} fontSize={64} />
+                <Box>
+                  <Text
+                    as="span"
+                    fontSize="sm"
+                    fontWeight="black"
+                    bgColor="blue.500"
+                    color="white"
+                    px={1}
+                    rounded="base"
+                    verticalAlign="text-bottom"
+                  >
+                    USE
+                  </Text>
+                  <Text as="span" fontSize="xl" fontWeight="bold">
+                    Mindmap
+                  </Text>
+                </Box>
+              </HStack>
+            </Link>
             <Stack spacing={{ base: '2', md: '3' }} textAlign="center">
               <Heading size="lg">Sign in to your account</Heading>
               <HStack spacing="1" justify="center">
