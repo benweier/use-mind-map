@@ -1,7 +1,7 @@
 import { Box, Button, Container, Heading, Icon, Stack, Text, useBreakpointValue, useToast } from '@chakra-ui/react'
 import { FcMindMap } from 'react-icons/fc'
 import { useMutation } from 'react-query'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { Navigate, useNavigate, useSearchParams } from 'react-router-dom'
 import { Meta } from '@/components/Meta'
 import { appwrite } from '@/services/appwrite'
 
@@ -66,7 +66,7 @@ export const AcceptInvite = () => {
   const userId = params.get('userId')
   const secret = params.get('secret')
 
-  if (!membershipId || !teamId || !userId || !secret) return <></>
+  if (!membershipId || !teamId || !userId || !secret) return <Navigate to="/" replace />
 
   return (
     <Box minW="100vw" minH="100vh" bg="gray.100">
