@@ -36,6 +36,13 @@
     "types": ["node", "webpack-env"]
   },
   "files": ["usemindmap.d.ts"],
-  "include": [".eslintrc.js", "webpack.config.js", "src/**/*.ts", "src/**/*.tsx", "functions/**/*.js"],
+  "include": [
+    ".eslintrc.js",
+    "webpack.config.js",
+    "babel.config.js",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "functions/**/*.js"
+  ],
   "exclude": ["node_modules", "build"]
 }

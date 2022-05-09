@@ -61,7 +61,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['.eslintrc.js', 'webpack.config.js', 'functions/**/*.js'],
+      files: ['.eslintrc.js', 'webpack.config.js', 'babel.config.js', 'functions/**/*.js'],
       plugins: ['node'],
       extends: ['plugin:node/recommended'],
       env: {
