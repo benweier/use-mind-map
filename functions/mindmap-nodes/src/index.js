@@ -65,6 +65,51 @@ const handler = async (req, res) => {
           return res.send('', 204)
         }
 
+        case 'node.update.label': {
+          /** @type {MindMapDocument} */
+          const mindmap = await database.getDocument(data.collection, data.document)
+          const nodes = mindmap.nodes.map((n) => {
+            /** @type {import('react-flow-renderer').Node} */
+            const node = JSON.parse(n)
+
+            if (node.id === data.node.id) {
+              return JSON.stringify({
+                ...node,
+                data: data.node.data,
+              })
+            }
+
+            return n
+          })
+
+          await database.updateDocument(data.collection, data.document, { nodes })
+
+          return res.send('', 204)
+        }
+
+        case 'node.update.size': {
+          /** @type {MindMapDocument} */
+          const mindmap = await database.getDocument(data.collection, data.document)
+          const nodes = mindmap.nodes.map((n) => {
+            /** @type {import('react-flow-renderer').Node} */
+            const node = JSON.parse(n)
+
+            if (node.id === data.node.id) {
+              return JSON.stringify({
+                ...node,
+                width: data.node.width,
+                height: data.node.height,
+              })
+            }
+
+            return n
+          })
+
+          await database.updateDocument(data.collection, data.document, { nodes })
+
+          return res.send('', 204)
+        }
+
         case 'node.delete': {
           /** @type {MindMapDocument} */
           const mindmap = await database.getDocument(data.collection, data.document)
