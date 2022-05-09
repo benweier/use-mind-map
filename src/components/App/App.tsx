@@ -3,7 +3,6 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { HelmetProvider } from 'react-helmet-async'
 import { QueryClientProvider } from 'react-query'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import { SentryInstrumentation } from '@/components/Sentry/Instrumentation'
 import { HomeRoute } from '@/routes/Home'
 import { client } from '@/services/query-client'
 import { theme } from '@/theme'
@@ -21,31 +20,29 @@ const MindMapRoute = lazy(() => import('@/routes/MindMap').then((mod) => ({ defa
 export const App = () => {
   return (
     <BrowserRouter>
-      <SentryInstrumentation>
-        <HelmetProvider>
-          <QueryClientProvider client={client}>
-            <ChakraProvider theme={theme}>
-              <Suspense fallback={<></>}>
-                <Routes>
-                  <Route index element={<HomeRoute />} />
+      <HelmetProvider>
+        <QueryClientProvider client={client}>
+          <ChakraProvider theme={theme}>
+            <Suspense fallback={<></>}>
+              <Routes>
+                <Route index element={<HomeRoute />} />
 
-                  <Route path="/sign-up" element={<SignupRoute />} />
-                  <Route path="/sign-in" element={<SigninRoute />} />
-                  <Route path="/forgot-password" element={<PasswordRecoveryRoute />} />
-                  <Route path="/reset-password" element={<PasswordRecoveryConfirmationRoute />} />
-                  <Route path="/sign-out" element={<></>} />
-                  <Route path="/invite" element={<AcceptInviteRoute />} />
+                <Route path="/sign-up" element={<SignupRoute />} />
+                <Route path="/sign-in" element={<SigninRoute />} />
+                <Route path="/forgot-password" element={<PasswordRecoveryRoute />} />
+                <Route path="/reset-password" element={<PasswordRecoveryConfirmationRoute />} />
+                <Route path="/sign-out" element={<></>} />
+                <Route path="/invite" element={<AcceptInviteRoute />} />
 
-                  <Route path="/~/maps/*" element={<MindMapRoute />} />
-                  <Route path="/~/*" element={<DashboardRoute />} />
+                <Route path="/~/maps/*" element={<MindMapRoute />} />
+                <Route path="/~/*" element={<DashboardRoute />} />
 
-                  <Route path="*" element={<Navigate to="/" replace />} />
-                </Routes>
-              </Suspense>
-            </ChakraProvider>
-          </QueryClientProvider>
-        </HelmetProvider>
-      </SentryInstrumentation>
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </Suspense>
+          </ChakraProvider>
+        </QueryClientProvider>
+      </HelmetProvider>
     </BrowserRouter>
   )
 }
