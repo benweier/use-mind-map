@@ -56,13 +56,13 @@ export const createMindmapNode = (collection: string, document: string, node: No
     true,
   )
 
-export const updateMindmapNode = (collection: string, document: string, node: Node<{ label: string }>) =>
+export const updateMindmapNode = (collection: string, document: string, event: string, node: Node<{ label: string }>) =>
   appwrite.functions.createExecution(
     env.APPWRITE_FUNCTION_MINDMAP_NODES,
     JSON.stringify({
       collection,
       document,
-      type: 'node.update.position',
+      type: event,
       node: {
         id: node.id,
         data: node.data,
