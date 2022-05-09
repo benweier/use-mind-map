@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo, useState } from 'react'
 import { Box } from '@chakra-ui/react'
 import { nanoid } from 'nanoid/non-secure'
 import ReactFlow, {
@@ -23,6 +23,7 @@ import {
   updateMindmapNode,
 } from '@/services/api'
 import { MindMapActions } from './Actions'
+import { MindMapNodeEditor } from './NodeEditor'
 import { useMindMapSubscription } from './useMindMapSubscription'
 
 const createEdge = (source: string, target: string): Edge => ({
@@ -33,7 +34,9 @@ const createEdge = (source: string, target: string): Edge => ({
 
 const Flow = ({ workspace, id }: { workspace: string; id: string }) => {
   const { data, isSuccess } = useMindMapSubscription(workspace, id)
-  const onNodeDragStop = useMutation((node: Node<{ label: string }>) => updateMindmapNode(workspace, id, node))
+  const onNodeDragStop = useMutation((node: Node<{ label: string }>) =>
+    updateMindmapNode(workspace, id, 'node.update.position', node),
+  )
   const onNodesDelete = useMutation((nodes: Node<{ label: string }>[]) => deleteMindmapNodes(workspace, id, nodes))
   const onEdgeCreate = useMutation(async (edge: Edge) => createMindmapEdge(workspace, id, edge))
   const onEdgeUpdateEnd = useMutation(async (edge: Edge) => updateMindmapEdge(workspace, id, edge))
@@ -80,6 +83,7 @@ const MindMapFlow = memo(
     onNodeDragStop: (node: Node) => void
     onNodesDelete: (nodes: Node[]) => void
   }) => {
+    const [activeNode, setActiveNode] = useState<Node | null>(null)
     const [n, , onNodesChange] = useNodesState(nodes)
     const [e, setEdges, onEdgesChange] = useEdgesState(edges)
     const onEdgeUpdate = (oldEdge: Edge, newConnection: Connection) => {
@@ -112,8 +116,14 @@ const MindMapFlow = memo(
         onEdgeUpdateEnd={(_event, edge) => onEdgeUpdateEnd(edge)}
         onEdgesDelete={onEdgesDelete}
         selectNodesOnDrag={false}
+        onNodeClick={(_event, node) => setActiveNode(node)}
+        onEdgeClick={(_event) => setActiveNode(null)}
+        onPaneClick={() => setActiveNode(null)}
       >
         <MindMapActions workspace={workspace} id={id} />
+        {activeNode && (
+          <MindMapNodeEditor workspace={workspace} id={id} node={activeNode} onSuccess={() => setActiveNode(null)} />
+        )}
         <Background />
         <Controls />
       </ReactFlow>
