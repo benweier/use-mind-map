@@ -4,6 +4,7 @@ import { HelmetProvider } from 'react-helmet-async'
 import { QueryClientProvider } from 'react-query'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { SentryInstrumentation } from '@/components/Sentry/Instrumentation'
+import { HomeRoute } from '@/routes/Home'
 import { client } from '@/services/query-client'
 import { theme } from '@/theme'
 
@@ -26,7 +27,7 @@ export const App = () => {
             <ChakraProvider theme={theme}>
               <Suspense fallback={<></>}>
                 <Routes>
-                  <Route index element={<></>} />
+                  <Route index element={<HomeRoute />} />
 
                   <Route path="/sign-up" element={<SignupRoute />} />
                   <Route path="/sign-in" element={<SigninRoute />} />
