@@ -47,6 +47,7 @@ export const PasswordRecovery = () => {
           title: 'Password recovery email sent',
           description: 'Check your email for the link to reset your password',
           status: 'success',
+          position: 'bottom',
         })
       },
     },

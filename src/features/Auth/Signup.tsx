@@ -43,7 +43,7 @@ export const Signup = () => {
           title: `Hi, ${response.name}!`,
           description: 'Your account has been created.',
           status: 'success',
-          position: 'top',
+          position: 'bottom',
         })
         navigate('/sign-in', {
           state: response,

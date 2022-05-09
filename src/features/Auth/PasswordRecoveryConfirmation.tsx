@@ -49,6 +49,7 @@ export const PasswordRecoveryConfirmation = () => {
           title: 'Your password has been reset!',
           description: 'Try signing in. I bet it works now',
           status: 'success',
+          position: 'bottom',
         })
         navigate('/sign-in')
       },
