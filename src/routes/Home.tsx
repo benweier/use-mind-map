@@ -9,7 +9,16 @@ export const HomeRoute = () => {
         <Box maxW={{ base: 'xl', md: '5xl' }} mx="auto" px={8}>
           <Stack spacing={8} py={12}>
             <Box textAlign="center">
-              <Text as="span" fontSize="lg" fontWeight="black" bgColor="blue.500" color="white" px={1} rounded="base">
+              <Text
+                as="span"
+                fontSize="lg"
+                fontWeight="black"
+                bgColor="blue.500"
+                color="white"
+                px={1}
+                rounded="base"
+                verticalAlign="text-bottom"
+              >
                 USE
               </Text>
               <Text as="span" fontSize="4xl" fontWeight="bold">
