@@ -9,16 +9,7 @@ export const HomeRoute = () => {
         <Box maxW={{ base: 'xl', md: '5xl' }} mx="auto" px={8}>
           <Stack spacing={8} py={12}>
             <Box textAlign="center">
-              <Text
-                as="span"
-                fontSize="lg"
-                fontWeight="black"
-                bgColor="blue.500"
-                color="white"
-                px={1}
-                rounded="base"
-                verticalAlign="text-bottom"
-              >
+              <Text as="span" fontSize="lg" fontWeight="black" bgColor="blue.500" color="white" px={1} rounded="base">
                 USE
               </Text>
               <Text as="span" fontSize="4xl" fontWeight="bold">
@@ -54,7 +45,15 @@ export const HomeRoute = () => {
               <Button as={RouterLink} to="/sign-in" size="lg" colorScheme="blue" px={8} fontWeight="bold" fontSize="md">
                 Get started
               </Button>
-              <Button as="a" href="https://dev.to" size="lg" color="blue.400" px={8} fontWeight="bold" fontSize="md">
+              <Button
+                as="a"
+                href="https://dev.to/benweier/usemindmap-1j3f"
+                size="lg"
+                color="blue.400"
+                px={8}
+                fontWeight="bold"
+                fontSize="md"
+              >
                 Read more
               </Button>
             </HStack>
