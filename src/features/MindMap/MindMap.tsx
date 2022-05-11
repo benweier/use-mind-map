@@ -27,10 +27,22 @@ import { SimpleNode } from './Node'
 import { MindMapNodeEditor } from './NodeEditor'
 import { useMindMapSubscription } from './useMindMapSubscription'
 
-const createEdge = (source: string, target: string): Edge => ({
+const createEdge = ({
+  source,
+  target,
+  sourceHandle,
+  targetHandle,
+}: {
+  source: string
+  target: string
+  sourceHandle: string | null
+  targetHandle: string | null
+}): Edge => ({
   id: `edge-${nanoid(9)}`,
   source,
   target,
+  sourceHandle,
+  targetHandle,
 })
 
 const Flow = ({ workspace, id }: { workspace: string; id: string }) => {
@@ -92,10 +104,10 @@ const MindMapFlow = memo(
         return updateEdge(oldEdge, newConnection, edge)
       })
     }
-    const onConnect = ({ source, target }: Connection) => {
+    const onConnect = ({ source, target, sourceHandle, targetHandle }: Connection) => {
       if (source && target) {
         setEdges((edges) => {
-          const edge = createEdge(source, target)
+          const edge = createEdge({ source, target, sourceHandle, targetHandle })
           onEdgeCreate(edge)
           return addEdge(edge, edges)
         })
