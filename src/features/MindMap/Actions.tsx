@@ -9,6 +9,7 @@ import { createMindmapNode } from '@/services/api'
 const createNode = (): Node<{ label: string }> => ({
   id: `node-${nanoid(9)}`,
   data: { label: '...' },
+  type: 'simple',
   position: {
     x: window.innerWidth / 2 - 125,
     y: window.innerHeight / 2,
