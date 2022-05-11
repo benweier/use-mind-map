@@ -1,4 +1,4 @@
-import { memo, useState } from 'react'
+import { memo, useMemo, useState } from 'react'
 import { Box } from '@chakra-ui/react'
 import { nanoid } from 'nanoid/non-secure'
 import ReactFlow, {
@@ -23,6 +23,7 @@ import {
   updateMindmapNode,
 } from '@/services/api'
 import { MindMapActions } from './Actions'
+import { SimpleNode } from './Node'
 import { MindMapNodeEditor } from './NodeEditor'
 import { useMindMapSubscription } from './useMindMapSubscription'
 
@@ -100,6 +101,7 @@ const MindMapFlow = memo(
         })
       }
     }
+    const nodeTypes = useMemo(() => ({ simple: SimpleNode }), [])
 
     return (
       <ReactFlow
@@ -107,6 +109,7 @@ const MindMapFlow = memo(
         snapGrid={[10, 10]}
         nodes={n}
         edges={e}
+        nodeTypes={nodeTypes}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onNodeDragStop={(_event, node) => onNodeDragStop(node)}
