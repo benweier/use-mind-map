@@ -134,6 +134,7 @@ const MindMapFlow = memo(
         onNodeClick={(_event, node) => setActiveNode(node)}
         onEdgeClick={(_event) => setActiveNode(null)}
         onPaneClick={() => setActiveNode(null)}
+        defaultZoom={1}
       >
         <MindMapActions workspace={workspace} id={id} />
         {activeNode && (
