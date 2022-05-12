@@ -48,7 +48,7 @@ const handler = async (req, res) => {
             const edge = JSON.parse(n)
 
             if (edge.id === data.edge.id) {
-              return JSON.stringify(edge)
+              return JSON.stringify(data.edge)
             }
 
             return n
