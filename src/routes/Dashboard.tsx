@@ -9,7 +9,7 @@ export const DashboardRoute = () => {
 
   if (accountQuery.isLoading) return <></>
 
-  if (accountQuery.isError) return <Navigate to="/auth" replace />
+  if (accountQuery.isError) return <Navigate to="/sign-in" replace />
 
   return (
     <Routes>
