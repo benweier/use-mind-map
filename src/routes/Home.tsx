@@ -51,7 +51,15 @@ export const HomeRoute = () => {
 
           <VStack justify="center" mt={10} mb={10} spacing={20}>
             <HStack spacing={8}>
-              <Button as={RouterLink} to="/sign-in" size="lg" colorScheme="blue" px={8} fontWeight="bold" fontSize="md">
+              <Button
+                as={RouterLink}
+                to="/get-started"
+                size="lg"
+                colorScheme="blue"
+                px={8}
+                fontWeight="bold"
+                fontSize="md"
+              >
                 Get started
               </Button>
               <Button

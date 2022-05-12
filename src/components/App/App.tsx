@@ -3,6 +3,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { HelmetProvider } from 'react-helmet-async'
 import { QueryClientProvider } from 'react-query'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { GetStarted } from '@/features/Auth/GetStarted'
 import { HomeRoute } from '@/routes/Home'
 import { client } from '@/services/query-client'
 import { theme } from '@/theme'
@@ -27,6 +28,7 @@ export const App = () => {
               <Routes>
                 <Route index element={<HomeRoute />} />
 
+                <Route path="/get-started" element={<GetStarted />} />
                 <Route path="/sign-up" element={<SignupRoute />} />
                 <Route path="/sign-in" element={<SigninRoute />} />
                 <Route path="/forgot-password" element={<PasswordRecoveryRoute />} />
