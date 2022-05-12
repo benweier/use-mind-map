@@ -1,7 +1,7 @@
 import { Box, Text } from '@chakra-ui/react'
 import { Handle, NodeProps, Position } from 'react-flow-renderer'
 
-export const SimpleNode = ({ data }: NodeProps<{ label: string }>) => {
+export const SimpleNode = ({ data, selected }: NodeProps<{ label: string }>) => {
   return (
     <>
       <Handle
@@ -23,7 +23,16 @@ export const SimpleNode = ({ data }: NodeProps<{ label: string }>) => {
         style={{ top: 10, bottom: 'auto', width: 10, height: 10, borderWidth: 2, backgroundColor: '#D53F8C' }}
       />
 
-      <Box px={5} py={2} minW={200} maxW={300} border="2px" borderColor="gray.600" rounded="lg" bgColor="gray.50">
+      <Box
+        px={5}
+        py={2}
+        minW={200}
+        maxW={300}
+        border="2px"
+        borderColor={selected ? 'green.400' : 'gray.600'}
+        rounded="lg"
+        bgColor="gray.50"
+      >
         <Text fontSize="sm" textAlign="center">
           {data.label}
         </Text>
