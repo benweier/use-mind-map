@@ -15,7 +15,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { createTeam } from '@/services/api'
 import { MindMapCollectionID } from '@/services/appwrite'
@@ -26,6 +26,7 @@ interface CreateTeamFormState {
 }
 
 export const CreateTeam = () => {
+  const queryClient = useQueryClient()
   const navigate = useNavigate()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { register, handleSubmit } = useForm<CreateTeamFormState>({
@@ -35,6 +36,7 @@ export const CreateTeam = () => {
   })
   const { mutateAsync, isLoading } = useMutation((values: CreateTeamFormState) => createTeam(values.name), {
     onSuccess: (response) => {
+      queryClient.invalidateQueries(['teams'])
       navigate(`/~/teams/${response.$id}`)
     },
   })
