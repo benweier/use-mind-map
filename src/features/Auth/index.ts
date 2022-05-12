@@ -1,5 +1,6 @@
 export { Signup } from './Signup'
 export { Signin } from './Signin'
+export { Signout } from './Signout'
 export { PasswordRecovery } from './PasswordRecovery'
 export { PasswordRecoveryConfirmation } from './PasswordRecoveryConfirmation'
 export { AcceptInvite } from './AcceptInvite'
