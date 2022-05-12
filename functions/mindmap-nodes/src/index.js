@@ -113,6 +113,7 @@ const handler = async (req, res) => {
         case 'node.delete': {
           /** @type {MindMapDocument} */
           const mindmap = await database.getDocument(data.collection, data.document)
+
           const nodes = mindmap.nodes.filter((n) => {
             /** @type {import('react-flow-renderer').Node} */
             const node = JSON.parse(n)
@@ -120,7 +121,14 @@ const handler = async (req, res) => {
             return !data.nodes.includes(node.id)
           })
 
-          await database.updateDocument(data.collection, data.document, { nodes })
+          const edges = mindmap.edges.filter((n) => {
+            /** @type {import('react-flow-renderer').Edge} */
+            const edge = JSON.parse(n)
+
+            return !data.nodes.includes(edge.source) && !data.nodes.includes(edge.target)
+          })
+
+          await database.updateDocument(data.collection, data.document, { nodes, edges })
 
           return res.send('', 204)
         }
