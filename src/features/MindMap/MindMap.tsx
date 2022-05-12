@@ -23,6 +23,7 @@ import {
   updateMindmapNode,
 } from '@/services/api'
 import { MindMapActions } from './Actions'
+import { SimpleEdge } from './Edge'
 import { SimpleNode } from './Node'
 import { MindMapNodeEditor } from './NodeEditor'
 import { useMindMapSubscription } from './useMindMapSubscription'
@@ -39,6 +40,7 @@ const createEdge = ({
   targetHandle: string | null
 }): Edge => ({
   id: `edge-${nanoid(9)}`,
+  type: 'simple',
   source,
   target,
   sourceHandle,
@@ -114,6 +116,7 @@ const MindMapFlow = memo(
       }
     }
     const nodeTypes = useMemo(() => ({ simple: SimpleNode }), [])
+    const edgeTypes = useMemo(() => ({ simple: SimpleEdge }), [])
 
     return (
       <ReactFlow
@@ -122,6 +125,7 @@ const MindMapFlow = memo(
         nodes={n}
         edges={e}
         nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onNodeDragStop={(_event, node) => onNodeDragStop(node)}
