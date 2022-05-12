@@ -14,12 +14,11 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { FcMindMap } from 'react-icons/fc'
-import { useQuery, useQueryClient } from 'react-query'
+import { useQuery } from 'react-query'
 import { Link as RouterLink, useParams } from 'react-router-dom'
 import { Meta } from '@/components/Meta'
-import { listMindMaps } from '@/services/api'
+import { getTeam, listMindMaps } from '@/services/api'
 import { MindMapCollectionID } from '@/services/appwrite'
-import { Models } from 'appwrite'
 import { CreateMindMind } from './CreateMindMap'
 import { InviteMember } from './InviteMember'
 import { MindMapActions } from './MindMapActions'
@@ -67,24 +66,21 @@ const WorkspaceDocuments: FC<{ id: MindMapCollectionID }> = ({ id }) => {
 
 export const TeamWorkspace: FC = () => {
   const { id } = useParams()
-  const queryClient = useQueryClient()
+  const { data, isSuccess } = useQuery(['team', id], () => (id ? getTeam(id) : Promise.reject('Missing ID')))
 
-  const teams = queryClient.getQueryData<Models.TeamList>(['teams'])
-  const team = teams?.teams.find((team) => team.$id === id)
-
-  if (!team) return <></>
+  if (!isSuccess) return <></>
 
   return (
     <>
-      <Meta title={team.name} />
+      <Meta title={data.name} />
 
       <Container maxW="5xl">
         <Flex p={6} alignItems="center">
           <Heading as="h1" size="lg">
-            {team.name}
+            {data.name}
           </Heading>
           <Spacer />
-          <InviteMember id={team.$id} />
+          <InviteMember id={data.$id} />
         </Flex>
 
         <Box p={6}>

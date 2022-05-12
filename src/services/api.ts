@@ -9,6 +9,8 @@ export const getCurrentSession = () => appwrite.account.getSession('current')
 
 export const deleteCurrentSession = () => appwrite.account.deleteSession('current')
 
+export const getTeam = (id: string) => appwrite.teams.get(id)
+
 export const listTeams = () => appwrite.teams.list()
 
 export const listMindMaps = (id: MindMapCollectionID) => appwrite.database.listDocuments<MindMapDocument>(id)
