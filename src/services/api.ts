@@ -5,6 +5,8 @@ import { MindMapCollectionID, MindMapDocument, appwrite } from './appwrite'
 
 export const getAccount = () => appwrite.account.get<{ gravatar: string }>()
 
+export const getCurrentSession = () => appwrite.account.getSession('current')
+
 export const deleteCurrentSession = () => appwrite.account.deleteSession('current')
 
 export const listTeams = () => appwrite.teams.list()
