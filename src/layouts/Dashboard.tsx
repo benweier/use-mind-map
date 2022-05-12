@@ -1,12 +1,12 @@
-import { ReactNode, useCallback } from 'react'
+import { ReactNode } from 'react'
 import { As, Box, Button, Flex, HStack, Icon, Link, Stack, Text } from '@chakra-ui/react'
 import { FcMindMap } from 'react-icons/fc'
 import { HiOutlineHome, HiOutlineLogout, HiOutlineUserCircle, HiOutlineUserGroup } from 'react-icons/hi'
 import { RiMindMap } from 'react-icons/ri'
-import { useMutation, useQuery } from 'react-query'
+import { useQuery } from 'react-query'
 import { Outlet, Link as RouterLink, useMatch, useNavigate, useResolvedPath } from 'react-router-dom'
 import { UserProfile } from '@/components/User/Profile'
-import { deleteCurrentSession, getAccount, listTeams } from '@/services/api'
+import { getAccount, listTeams } from '@/services/api'
 
 interface NavItemProps {
   icon: As
@@ -68,13 +68,9 @@ const Workspaces = () => {
 
 const SignOut = () => {
   const navigate = useNavigate()
-  const { mutate, isLoading } = useMutation(deleteCurrentSession, {
-    onSuccess: () => navigate('/'),
-  })
-  const onClick = useCallback(() => mutate(), [mutate])
 
   return (
-    <Button variant="ghost" justifyContent="start" disabled={isLoading} onClick={onClick}>
+    <Button variant="ghost" justifyContent="start" onClick={() => navigate('/sign-out')}>
       <HStack spacing={3}>
         <Icon as={HiOutlineLogout} boxSize={6} color="gray.500" />
         <Text>Sign out</Text>
