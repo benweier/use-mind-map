@@ -1,4 +1,4 @@
-import { memo, useMemo, useState } from 'react'
+import { memo, useCallback, useMemo, useState } from 'react'
 import { Box } from '@chakra-ui/react'
 import { nanoid } from 'nanoid/non-secure'
 import ReactFlow, {
@@ -29,17 +29,19 @@ import { MindMapNodeEditor } from './NodeEditor'
 import { useMindMapSubscription } from './useMindMapSubscription'
 
 const createEdge = ({
+  id,
   source,
   target,
   sourceHandle,
   targetHandle,
 }: {
+  id?: string
   source: string
   target: string
   sourceHandle: string | null
   targetHandle: string | null
 }): Edge => ({
-  id: `edge-${nanoid(9)}`,
+  id: id ?? `edge-${nanoid(9)}`,
   type: 'simple',
   source,
   target,
@@ -101,20 +103,32 @@ const MindMapFlow = memo(
     const [activeNode, setActiveNode] = useState<Node | null>(null)
     const [n, , onNodesChange] = useNodesState(nodes)
     const [e, setEdges, onEdgesChange] = useEdgesState(edges)
-    const onEdgeUpdate = (oldEdge: Edge, newConnection: Connection) => {
-      setEdges((edge) => {
-        return updateEdge(oldEdge, newConnection, edge)
-      })
-    }
-    const onConnect = ({ source, target, sourceHandle, targetHandle }: Connection) => {
-      if (source && target) {
-        setEdges((edges) => {
-          const edge = createEdge({ source, target, sourceHandle, targetHandle })
-          onEdgeCreate(edge)
-          return addEdge(edge, edges)
-        })
-      }
-    }
+    const onEdgeUpdate = useCallback(
+      (edge: Edge, connection: Connection) => {
+        const { id } = edge
+        const { source, target, sourceHandle, targetHandle } = connection
+
+        if (source && target) {
+          setEdges((edges) => {
+            onEdgeUpdateEnd(createEdge({ id, source, target, sourceHandle, targetHandle }))
+            return updateEdge(edge, connection, edges)
+          })
+        }
+      },
+      [onEdgeUpdateEnd, setEdges],
+    )
+    const onConnect = useCallback(
+      ({ source, target, sourceHandle, targetHandle }: Connection) => {
+        if (source && target) {
+          setEdges((edges) => {
+            const edge = createEdge({ source, target, sourceHandle, targetHandle })
+            onEdgeCreate(edge)
+            return addEdge(edge, edges)
+          })
+        }
+      },
+      [onEdgeCreate, setEdges],
+    )
     const nodeTypes = useMemo(() => ({ simple: SimpleNode }), [])
     const edgeTypes = useMemo(() => ({ simple: SimpleEdge }), [])
 
@@ -132,7 +146,6 @@ const MindMapFlow = memo(
         onNodesDelete={onNodesDelete}
         onConnect={onConnect}
         onEdgeUpdate={onEdgeUpdate}
-        onEdgeUpdateEnd={(_event, edge) => onEdgeUpdateEnd(edge)}
         onEdgesDelete={onEdgesDelete}
         selectNodesOnDrag={false}
         onNodeClick={(_event, node) => setActiveNode(node)}
