@@ -59,7 +59,7 @@ export const MindMapNodeEditor = memo(
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack direction="column" spacing={2}>
             <Stack direction="column" spacing={4}>
-              <Input {...register('label')} />
+              <Input {...register('label')} autoFocus />
               <Button type="submit" variant="primary" disabled={isLoading}>
                 Save
               </Button>
