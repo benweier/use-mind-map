@@ -119,6 +119,7 @@ export const updateMindmapEdge = (collection: string, document: string, edge: Ed
       type: 'edge.update.connection',
       edge: {
         id: edge.id,
+        type: edge.type,
         source: edge.source,
         target: edge.target,
         sourceHandle: edge.sourceHandle,

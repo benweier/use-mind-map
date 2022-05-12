@@ -30,19 +30,21 @@ import { useMindMapSubscription } from './useMindMapSubscription'
 
 const createEdge = ({
   id,
+  type,
   source,
   target,
   sourceHandle,
   targetHandle,
 }: {
   id?: string
+  type?: string
   source: string
   target: string
   sourceHandle: string | null
   targetHandle: string | null
 }): Edge => ({
   id: id ?? `edge-${nanoid(9)}`,
-  type: 'simple',
+  type: type ?? 'simple',
   source,
   target,
   sourceHandle,
@@ -105,12 +107,12 @@ const MindMapFlow = memo(
     const [e, setEdges, onEdgesChange] = useEdgesState(edges)
     const onEdgeUpdate = useCallback(
       (edge: Edge, connection: Connection) => {
-        const { id } = edge
+        const { id, type } = edge
         const { source, target, sourceHandle, targetHandle } = connection
 
         if (source && target) {
           setEdges((edges) => {
-            onEdgeUpdateEnd(createEdge({ id, source, target, sourceHandle, targetHandle }))
+            onEdgeUpdateEnd(createEdge({ id, type, source, target, sourceHandle, targetHandle }))
             return updateEdge(edge, connection, edges)
           })
         }
