@@ -96,6 +96,7 @@ export const createMindmapEdge = (collection: string, document: string, edge: Ed
       type: 'edge.create',
       edge: {
         id: edge.id,
+        type: edge.type,
         source: edge.source,
         target: edge.target,
         sourceHandle: edge.sourceHandle,
@@ -130,7 +131,7 @@ export const deleteMindmapEdges = (collection: string, document: string, edges: 
       collection,
       document,
       type: 'edge.delete',
-      nodes: edges.map((edge) => edge.id),
+      edges: edges.map((edge) => edge.id),
     }),
     true,
   )
